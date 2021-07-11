@@ -15,8 +15,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     @IBOutlet weak var bottomText: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var toolBar: UIToolbar!
-    
+    //photo library
     @IBOutlet weak var barButton1: UIBarButtonItem!
+    //Camera
     @IBOutlet weak var barButton2: UIBarButtonItem!
     
     @IBOutlet weak var shareButton: UIBarButtonItem!
@@ -24,82 +25,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     var originalImage : UIImage?
     
     var imagePicker = UIImagePickerController()
-    
-    let memeTextAttributes: [NSAttributedString.Key: Any] = [
-        NSAttributedString.Key.strokeColor: UIColor.black,
-        NSAttributedString.Key.foregroundColor: UIColor.blue,
-        
-        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 35)!,
-        NSAttributedString.Key.strokeWidth: 5.00
-    ]
-    
-    //MARK:- Share button is pressed:
-    //After disabling share button, we will present  activity View Controller
-    @IBAction func shareMeme(_ sender: UIBarButtonItem) {
-        
-       
-        enableShareButtonValidate()
-        let myImage = generateMemedImage()
-        let myActivityItems = [myImage]
-        let activityController = UIActivityViewController(activityItems: myActivityItems, applicationActivities: .none)
-       // activityController.popoverPresentationController?.sourceView = self.view// so that iPads won't crash
-        
-        activityController.completionWithItemsHandler = { activity, completed, items, error in
-         
-                       if completed {
-         
-                           self.saveImage(sharedMeme: myImage)
-         
-                       }
-        
-                   }
-        
-        if let wPPC = activityController.popoverPresentationController {
-          
-            wPPC.barButtonItem = self.shareButton
-        }
-        // exclude some activity types from the list (optional)
-                activityController.excludedActivityTypes = [  UIActivity.ActivityType.postToFacebook ]
-                
-                // present the view controller
-                self.present(activityController, animated: true, completion: nil)
-                
-        
-        enableShareButtonValidate()
-        
-    }
-    
-    //MARK:- Cancel Meme is pressed on the navigation bar
-    @IBAction func cancelMeme(_ sender: UIBarButtonItem) {
-        
-        imageView.image = nil
-        topText.placeholder = "Top Text"
-        bottomText.placeholder = "Bottom Text"
-        topText.text = ""
-        bottomText.text = ""
-        enableShareButtonValidate()
-        
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        imagePicker.delegate = self
-        topText.delegate = self
-        bottomText.delegate = self
-        
-     
-            
-            topText.defaultTextAttributes = memeTextAttributes
-            bottomText.defaultTextAttributes = memeTextAttributes
-        topText.textAlignment = .center
-        bottomText.textAlignment = .center
-        
-        //To validate share button should be enabled or disabled
-     enableShareButtonValidate()
-        
-   
-    }
     
     //subscribe and unsubscribe to the keyboard notifications
     override func viewWillAppear(_ animated: Bool) {
@@ -112,6 +37,24 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         unsubscribeToKeyboardNotification()
         
     }
+    
+    //After app launched
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        imagePicker.delegate = self
+        topText.delegate = self
+        bottomText.delegate = self
+        
+        //UI initialization
+        if UIDevice.isSimulator
+        {uiAttributesAccordingly(didLoad : true, isSimulator: true)
+        }
+        else{uiAttributesAccordingly(didLoad : true)
+        }
+        
+    }
+  
     
     //MARK:- This function is called once user chooses camera.
     @IBAction func cameraButtonPressed(_ sender: UIButton) {
@@ -128,8 +71,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     //present the UIImagePicker on full screen for camera.
         imagePicker.modalPresentationStyle = .fullScreen
         self.present(imagePicker, animated: true, completion: nil)
-       
-        
      }
     
 
@@ -163,9 +104,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
        
         originalImage = tempImage!
         imageView.image = originalImage
-        enableShareButtonValidate()
+        
+        //Check to enable/disable share button
+      uiAttributesAccordingly()
        
-               self.dismiss(animated: true)
+        self.dismiss(animated: true)
     }
     
 
@@ -204,6 +147,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
                 {
                 self.view.frame.origin.y += keyboardSize.height
                 }}
+            
+            uiAttributesAccordingly()
         }
     }
     
@@ -213,49 +158,74 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object : nil)
     }
     
+    
+    //MARK:- Share button is pressed:
+    //After disabling share button, we will present  activity View Controller
+    @IBAction func shareMeme(_ sender: UIBarButtonItem) {
+        
+        let myImage = generateMemedImage()
+        let myActivityItems = [myImage]
+        let activityController = UIActivityViewController(activityItems: myActivityItems, applicationActivities: .none)
+       // activityController.popoverPresentationController?.sourceView = self.view// so that iPads won't crash
+        
+        activityController.completionWithItemsHandler = { activity, completed, items, error in
+         
+            if completed {
+         
+            self.saveImage(sharedMeme: myImage)}
+                                           }
+        
+        if let wPPC = activityController.popoverPresentationController {
+          
+            wPPC.barButtonItem = self.shareButton
+        }
+        // exclude some activity types from the list (optional)
+                activityController.excludedActivityTypes = [  UIActivity.ActivityType.postToFacebook ]
+                
+                // present the view controller
+                self.present(activityController, animated: true, completion: nil)
+                
+        
+        uiAttributesAccordingly()
+        
+    }
+    //MARK:- Cancel Meme is pressed on the navigation bar
+    @IBAction func cancelMeme(_ sender: UIBarButtonItem) {
+        uiAttributesAccordingly(cancelMeme : true)
+        
+    }
 }
 
 //MARK:- UITextFieldDelegate methods implementation
 
 extension ViewController :UITextFieldDelegate
 {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-       if textField.text == "Bottom Text" || textField.text == "Top Text"
-        {
-            textField.text = ""
-        }
-    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        enableShareButtonValidate()
+      uiAttributesAccordingly()
         return textField.resignFirstResponder()
     }
     
-  
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        textField.resignFirstResponder()
+        uiAttributesAccordingly()
+    }
     
     //MARK:- Share the Memed picture
     func saveImage(sharedMeme : UIImage)
     {
-        
-        // unwrap optionals
+        // unwrap optionals - reverify the fields
+        if imageView.image != nil && topText.text != nil && bottomText.text != nil
+        {
+        let top = self.topText.text!
        
-                  if imageView.image != nil && topText.text != nil && bottomText.text != nil
+        let bottom = self.bottomText.text!
        
-                  {
-       
-                      let top = self.topText.text!
-       
-                      let bottom = self.bottomText.text!
-       
-                      
-       
-                  let meme =  MeMeShareModal(topText: top, bottomText: bottom, originalImage: originalImage, memeImage: sharedMeme)
+        let meme =  MeMeShareModal(topText: top, bottomText: bottom, originalImage: originalImage, memeImage: sharedMeme)
       
-                    (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
+        (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
     
-                  }
-       
-        
-       
+        }
     }
     
     //MARK:- Create an image from current UIView(image + top text + bottom text)
@@ -276,19 +246,58 @@ extension ViewController :UITextFieldDelegate
         return memedImage
     }
     
+   
+    
+    
+    func uiAttributesAccordingly(didLoad: Bool = false, cancelMeme : Bool = false, isSimulator : Bool = false)
+{
+    
+        
+        if didLoad
+        {
+        topText.defaultTextAttributes = Attributes.memeTextAttributes
+        bottomText.defaultTextAttributes = Attributes.memeTextAttributes
+        topText.textAlignment = .center
+        bottomText.textAlignment = .center
+            topText.text = ""
+            bottomText.text = ""
+            
+            if isSimulator
+            {
+                //Disable camera for simulator
+                self.barButton2.isEnabled = false
+            }
+            
+        }
+        if cancelMeme{
+            imageView.image = nil
+            topText.placeholder = "Top Text"
+            bottomText.placeholder = "Bottom Text"
+            topText.text = ""
+            bottomText.text = ""
+            
+        }
+        enableShareButtonValidate()
+}
     //Enabling and disabling of Share button
     func enableShareButtonValidate()
     {
-        if imageView.image != nil && topText.text != nil && bottomText.text != nil
+        if imageView.image != nil && topText.text != "" && bottomText.text != ""
 
         {
             shareButton.isEnabled = true
-        
-    }
-        else{
+        }
+        else
+        {
             shareButton.isEnabled = false
         }
-    
-    
 }
+   
+}
+extension UIDevice {
+    static var isSimulator: Bool {
+        return ProcessInfo.processInfo.environment["SIMULATOR_DEVICE_NAME"] != nil
+    }
+    
+    
 }

@@ -18,3 +18,15 @@ struct MeMeShareModal
     
     
 }
+
+
+struct Attributes
+{
+   static let memeTextAttributes: [NSAttributedString.Key: Any] = [
+        NSAttributedString.Key.strokeColor: UIColor.black,
+        NSAttributedString.Key.foregroundColor: UIColor.white,
+        
+        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 35)!,
+        NSAttributedString.Key.strokeWidth: -5.00
+    ]
+}

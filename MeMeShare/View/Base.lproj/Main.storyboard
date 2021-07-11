@@ -26,7 +26,7 @@
                                 <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" returnKeyType="done"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="BOTTOM TEXT" textAlignment="justified" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="93v-P7-M2L">
                                 <rect key="frame" x="0.0" y="744.33333333333337" width="414" height="18.666666666666629"/>
@@ -38,9 +38,9 @@
                             <toolbar clearsContextBeforeDrawing="NO" contentMode="scaleAspectFit" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="ej2-OI-qqL">
                                 <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                                 <items>
-                                    <barButtonItem style="plain" id="Ci6-lz-cTB">
+                                    <barButtonItem style="plain" id="Ci6-lz-cTB" userLabel="Bar Button 2">
                                         <button key="customView" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DQJ-uM-OKb">
-                                            <rect key="frame" x="20" y="14" width="145" height="26"/>
+                                            <rect key="frame" x="20" y="5" width="145" height="44"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                             <state key="normal">
@@ -100,7 +100,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="barButton1" destination="ayE-qg-g19" id="igy-6x-mhM"/>
-                        <outlet property="barButton2" destination="ayE-qg-g19" id="JUt-z5-Fsu"/>
+                        <outlet property="barButton2" destination="Ci6-lz-cTB" id="yfG-v1-EAG"/>
                         <outlet property="bottomText" destination="93v-P7-M2L" id="73a-u8-1qo"/>
                         <outlet property="imageView" destination="0vj-Kd-SbZ" id="r76-oh-OQC"/>
                         <outlet property="shareButton" destination="slC-j9-4Ch" id="clM-Jt-IiO"/>
