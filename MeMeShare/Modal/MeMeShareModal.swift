@@ -10,10 +10,10 @@ import UIKit
 
 struct MeMeShareModal
 {
-    var  topText : String?
-    var bottomText : String?
-    var originalImage : UIImage?
-    var memeImage : UIImage?
+    var  topText : String
+    var bottomText : String
+    var originalImage : UIImage
+    var memeImage : UIImage
     
     
     

@@ -16,6 +16,11 @@
 		5584E13C26948D6300B20D53 /* MeMeShareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5584E13B26948D6300B20D53 /* MeMeShareTests.swift */; };
 		5584E14726948D6300B20D53 /* MeMeShareUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5584E14626948D6300B20D53 /* MeMeShareUITests.swift */; };
 		5584E1552698A95C00B20D53 /* MeMeShareModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5584E1542698A95C00B20D53 /* MeMeShareModal.swift */; };
+		5584E163269D4E8100B20D53 /* ListMemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5584E162269D4E8000B20D53 /* ListMemesViewController.swift */; };
+		5584E165269D4EB100B20D53 /* GridMemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5584E164269D4EB100B20D53 /* GridMemesViewController.swift */; };
+		5584E167269D4F0100B20D53 /* GridMemesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5584E166269D4F0100B20D53 /* GridMemesViewCell.swift */; };
+		5584E169269D4F2600B20D53 /* ListMemesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5584E168269D4F2600B20D53 /* ListMemesViewCell.swift */; };
+		5584E16B269D5FF900B20D53 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5584E16A269D5FF900B20D53 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +56,11 @@
 		5584E14626948D6300B20D53 /* MeMeShareUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeMeShareUITests.swift; sourceTree = "<group>"; };
 		5584E14826948D6300B20D53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5584E1542698A95C00B20D53 /* MeMeShareModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeMeShareModal.swift; sourceTree = "<group>"; };
+		5584E162269D4E8000B20D53 /* ListMemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMemesViewController.swift; sourceTree = "<group>"; };
+		5584E164269D4EB100B20D53 /* GridMemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridMemesViewController.swift; sourceTree = "<group>"; };
+		5584E166269D4F0100B20D53 /* GridMemesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridMemesViewCell.swift; sourceTree = "<group>"; };
+		5584E168269D4F2600B20D53 /* ListMemesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMemesViewCell.swift; sourceTree = "<group>"; };
+		5584E16A269D5FF900B20D53 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +112,6 @@
 			isa = PBXGroup;
 			children = (
 				5584E157269941BD00B20D53 /* Controller */,
-				5584E156269941AF00B20D53 /* View */,
 				5584E158269941CB00B20D53 /* Modal */,
 				5584E12D26948D6200B20D53 /* Assets.xcassets */,
 				5584E12F26948D6200B20D53 /* LaunchScreen.storyboard */,
@@ -143,6 +152,12 @@
 				5584E12426948D5E00B20D53 /* AppDelegate.swift */,
 				5584E12626948D5E00B20D53 /* SceneDelegate.swift */,
 				5584E12826948D5E00B20D53 /* ViewController.swift */,
+				5584E162269D4E8000B20D53 /* ListMemesViewController.swift */,
+				5584E16A269D5FF900B20D53 /* DetailViewController.swift */,
+				5584E168269D4F2600B20D53 /* ListMemesViewCell.swift */,
+				5584E164269D4EB100B20D53 /* GridMemesViewController.swift */,
+				5584E166269D4F0100B20D53 /* GridMemesViewCell.swift */,
+				5584E156269941AF00B20D53 /* View */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -285,10 +300,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5584E16B269D5FF900B20D53 /* DetailViewController.swift in Sources */,
+				5584E169269D4F2600B20D53 /* ListMemesViewCell.swift in Sources */,
 				5584E12926948D5E00B20D53 /* ViewController.swift in Sources */,
 				5584E12526948D5E00B20D53 /* AppDelegate.swift in Sources */,
+				5584E165269D4EB100B20D53 /* GridMemesViewController.swift in Sources */,
+				5584E167269D4F0100B20D53 /* GridMemesViewCell.swift in Sources */,
 				5584E12726948D5E00B20D53 /* SceneDelegate.swift in Sources */,
 				5584E1552698A95C00B20D53 /* MeMeShareModal.swift in Sources */,
+				5584E163269D4E8100B20D53 /* ListMemesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

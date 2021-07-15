@@ -171,6 +171,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         activityController.completionWithItemsHandler = { activity, completed, items, error in
          
             if completed {
+                
+                print("here here")
          
             self.saveImage(sharedMeme: myImage)}
                                            }
@@ -192,6 +194,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     //MARK:- Cancel Meme is pressed on the navigation bar
     @IBAction func cancelMeme(_ sender: UIBarButtonItem) {
         uiAttributesAccordingly(cancelMeme : true)
+        self.dismiss(animated: true)
         
     }
 }
@@ -221,9 +224,11 @@ extension ViewController :UITextFieldDelegate
        
         let bottom = self.bottomText.text!
        
-        let meme =  MeMeShareModal(topText: top, bottomText: bottom, originalImage: originalImage, memeImage: sharedMeme)
+            let meme =  MeMeShareModal(topText: top, bottomText: bottom, originalImage: originalImage!, memeImage: sharedMeme)
       
         (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
+            
+            print("Meme is saved")
     
         }
     }
